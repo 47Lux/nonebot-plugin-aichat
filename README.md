@@ -7,18 +7,18 @@ nonebot-plugin-aichat-simple
 
 A role-play chat plugin supporting official DeepSeek API, featuring a built-in web management panel.
 
-🌟 功能特点 | Features
-🎭 角色扮演强化：支持自定义 System Prompt，打造专属人格。
+ 功能特点 | Features
+ 角色扮演强化：支持自定义 System Prompt，打造专属人格。
 
-🖥️ 可视化管理：内置 Web 面板，无需手动修改 JSON 配置文件。
+ 可视化管理：内置 Web 面板，无需手动修改 JSON 配置文件。
 
-🧠 身份/群组映射：支持 User ID → 昵称、Group ID → 群名的映射，让 AI 更懂对话环境。
+ 身份/群组映射：支持 User ID → 昵称、Group ID → 群名的映射，让 AI 更懂对话环境。
 
-🎲 智能交互：支持前缀触发（如 #）及自定义概率的主动回复。
+ 智能交互：支持前缀触发（如 #）及自定义概率的主动回复。
 
-💾 记忆管理：支持关键词触发的长期记忆检索。
+ 记忆管理：支持关键词触发的长期记忆检索。
 
-🛠️ 安装 | Installation
+ 安装 | Installation
 使用 nb-cli 安装（推荐）：
 
 Bash
