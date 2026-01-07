@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "nonebot-plugin-aichat"
+name = "nonebot-plugin-aichatbyluxis"
 version = "0.1.0"
 description = "一个支持 DeepSeek API 的角色扮演插件。"
 authors = ["47Lux <2777433165@qq.com>"]
@@ -20,3 +20,4 @@ pydantic = ">=1.10.0,<3.0.0"
 requires = ["poetry-core>=1.0.0"]
 
 build-backend = "poetry.core.masonry.api"
+
