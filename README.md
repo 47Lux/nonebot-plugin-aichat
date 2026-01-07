@@ -27,10 +27,10 @@ A role-play chat plugin supporting official DeepSeek API, featuring a built-in w
 推荐使用 `nb-cli` 进行安装，它会自动处理依赖项：
 
 ```bash
-nb plugin install nonebot-plugin-aichat-simple
+nb plugin install nonebot-plugin-aichat
 ```
 ```bash
-pip install nonebot-plugin-aichat-simple
+pip install nonebot-plugin-aichat
 ```
  管理面板 | Web Admin Panel
 插件启动后，你可以通过浏览器直接访问管理面板进行全参数调节：
