@@ -208,3 +208,9 @@ __marimo__/
 
 # AIChat 插件运行时生成的本地数据（包含私密配置）
 nonebot_plugin_aichat_simple/data/
+
+# 忽略当前目录下的 data 文件夹及其所有内容
+/data/
+
+# 显式忽略所有 .json 数据文件（可选，双重保险）
+*.json
