@@ -25,7 +25,6 @@ def load_local_data(file_path):
         return {}
 
 def remove_cq_code(message: str) -> str:
-    """移除消息中的 CQ 码（如图片、表情等标签）"""
     return re.sub(r'\[CQ:[^\]]+\]', '', message)
 
 
@@ -126,4 +125,5 @@ async def handle_chat(bot: Bot, event: Event):
         await call_language_model(bot, event, user_input, nickname, groupname)
     
     elif random.random() < getattr(cfg, "reply_probability", 0.0):
+
         await call_language_model(bot, event, msg_clean, nickname, groupname)
