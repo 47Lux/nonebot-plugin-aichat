@@ -1,4 +1,3 @@
-# __init__.py
 import os
 import json
 import random
@@ -6,12 +5,12 @@ import re
 import httpx
 from nonebot import logger, on_message
 from nonebot.adapters.onebot.v11 import Bot, Event
-from .config import cfg
-from .memory_manager import memory_manager
-from .web_admin import * 
 from nonebot.plugin import PluginMetadata
-from .config import PluginConfig # 确保你的 config 类名正确
 
+# 关键修复：统一从当前包导入，避免重复导入导致路径冲突
+from .config import cfg, PluginConfig
+from .memory_manager import memory_manager
+from .web_admin import * # 插件元数据
 __plugin_meta__ = PluginMetadata(
     name="AIChat（AI角色扮演对话插件）",
     description="支持动态角色设定、长期记忆、Web管理界面的极简 AI 聊天插件",
@@ -24,9 +23,13 @@ __plugin_meta__ = PluginMetadata(
 
 chat_history = {}
 
-
 def load_local_data(file_path):
     try:
+        # 兼容性修复：如果路径所在的文件夹不存在，先创建它，防止 FileNotFoundError
+        dir_name = os.path.dirname(file_path)
+        if dir_name and not os.path.exists(dir_name):
+            os.makedirs(dir_name, exist_ok=True)
+            
         if os.path.exists(file_path):
             with open(file_path, 'r', encoding='utf-8') as f:
                 return json.load(f)
@@ -38,7 +41,6 @@ def load_local_data(file_path):
 def remove_cq_code(message: str) -> str:
     return re.sub(r'\[CQ:[^\]]+\]', '', message)
 
-
 async def call_language_model(bot: Bot, event: Event, message: str, nickname: str, groupname: str):
     user_id = event.get_user_id()
     group_id = getattr(event, 'group_id', 'private')
@@ -46,13 +48,14 @@ async def call_language_model(bot: Bot, event: Event, message: str, nickname: st
     
     messages = chat_history.get(chat_history_key, [])
     if not messages:
+        # 使用 getattr 获取配置，增加安全性
+        system_prompt = getattr(cfg, "system_prompt", "你是路芸笙")
+        messages.append({"role": "system", "content": system_prompt})
 
-        messages.append({"role": "system", "content": getattr(cfg, "system_prompt", "你是路芸笙")})
-
-
+    # 搜索记忆并注入
     mem_context = memory_manager.search_memory(message)
     if mem_context:
-        messages.append({"role": "system", "content": mem_context})
+        messages.append({"role": "system", "content": f"相关记忆：{mem_context}"})
 
     speaker_mem = memory_manager.search_memory(nickname)
     if speaker_mem:
@@ -63,7 +66,7 @@ async def call_language_model(bot: Bot, event: Event, message: str, nickname: st
         except:
             messages.append({"role": "system", "content": f"关于{nickname}的记忆：{speaker_mem}"})
 
-
+    # 构造回答前缀
     reply_prefix_raw = getattr(cfg, "reply_prefix_template", "回答 {nickname} 在 {groupname} 说的：")
     try:
         prefix = reply_prefix_raw.format(nickname=nickname, groupname=groupname)
@@ -72,23 +75,26 @@ async def call_language_model(bot: Bot, event: Event, message: str, nickname: st
     
     messages.append({"role": "user", "content": f"{prefix} {message}"})
 
-
+    # 模型参数与请求
     model_params = getattr(cfg, "model_settings", {})
+    api_url = getattr(cfg, "api_url", "")
+    api_key = getattr(cfg, "api_key", "")
+    
     payload = {**model_params, "messages": messages}
     headers = {
-        "Authorization": f"Bearer {getattr(cfg, 'api_key', '')}",
+        "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json"
     }
 
     try:
         async with httpx.AsyncClient() as client:
-            response = await client.post(cfg.api_url, json=payload, headers=headers, timeout=60)
+            response = await client.post(api_url, json=payload, headers=headers, timeout=60)
             if response.status_code == 200:
                 res_json = response.json()
                 reply = res_json["choices"][0]["message"]["content"].strip()
                 messages.append({"role": "assistant", "content": reply})
                 
-             
+                # 历史记录清理
                 max_history = getattr(cfg, "max_chat_history", 11)
                 if len(messages) > max_history:
                     messages = [messages[0]] + messages[-(max_history - 1):]
@@ -100,16 +106,17 @@ async def call_language_model(bot: Bot, event: Event, message: str, nickname: st
     except Exception as e:
         logger.error(f"AI 调用异常: {e}")
 
-
+# 注册消息响应器
 chat_matcher = on_message(priority=2, block=False)
 
 @chat_matcher.handle()
 async def handle_chat(bot: Bot, event: Event):
-
+    # 动态加载最新配置
     if hasattr(cfg, "load"):
         cfg.load()
 
     raw_text = str(event.get_message())
+    # 过滤多媒体消息
     if any(tag in raw_text for tag in ["[CQ:image,", "[CQ:face,", "[CQ:record,"]):
         return
 
@@ -117,9 +124,12 @@ async def handle_chat(bot: Bot, event: Event):
     if not msg_clean:
         return
 
-
-    characters = load_local_data(cfg.characters_file)
-    groups = load_local_data(cfg.groups_file)
+    # 加载角色与群组数据
+    characters_file = getattr(cfg, "characters_file", "data/nonebot_plugin_aichat/characters.json")
+    groups_file = getattr(cfg, "groups_file", "data/nonebot_plugin_aichat/groups.json")
+    
+    characters = load_local_data(characters_file)
+    groups = load_local_data(groups_file)
 
     user_id = str(event.get_user_id())
     group_id = str(getattr(event, 'group_id', 'private'))
@@ -127,10 +137,9 @@ async def handle_chat(bot: Bot, event: Event):
     nickname = characters.get(user_id, "陌生人")
     groupname = groups.get(group_id, "某个地方")
 
-
+    # 触发逻辑
     cmd_prefix = getattr(cfg, "command_prefix", "#")
     
-
     if msg_clean.startswith(cmd_prefix):
         user_input = msg_clean[len(cmd_prefix):].strip()
         await call_language_model(bot, event, user_input, nickname, groupname)
