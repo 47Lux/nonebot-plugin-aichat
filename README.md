@@ -1,7 +1,7 @@
 # nonebot-plugin-aichat
 支持Deepseek大模型官方API的角色扮演对话插件。/A NoneBot2 plugin for role-playing chat powered by official DeepSeek API, featuring dynamic personality and memory management.
-nonebot-plugin-aichat-simple
-<p align="center"> <a href="https://v2.nonebot.dev/"><img src="https://img.shields.io/badge/nonebot-v2-red.svg" alt="nonebot"></a> <a href="https://pypi.org/project/nonebot-plugin-aichat-simple/"><img src="https://img.shields.io/pypi/v/nonebot-plugin-aichat-simple.svg" alt="pypi"></a> <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="python"> <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="license"> </p>
+nonebot-plugin-aichat
+<p align="center"> <a href="https://v2.nonebot.dev/"><img src="https://img.shields.io/badge/nonebot-v2-red.svg" alt="nonebot"></a> <a href="https://pypi.org/project/nonebot-plugin-aichat/"><img src="https://img.shields.io/pypi/v/nonebot-plugin-aichat.svg" alt="pypi"></a> <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="python"> <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="license"> </p>
 
 一套支持 DeepSeek 官方 API 的角色扮演对话插件，内置 Web 可视化管理面板。
 
@@ -24,16 +24,6 @@ A role-play chat plugin supporting official DeepSeek API, featuring a built-in w
 
  安装 | Installation
 使用 nb-cli 安装（推荐）：
-
-
-
-
-
-
-
-安装 | Installation
-
-推荐使用 `nb-cli` 进行安装，它会自动处理依赖项：
 
 ```bash
 nb plugin install nonebot-plugin-aichat
@@ -70,7 +60,7 @@ API 配置：设置 DeepSeek API Key 及端点。
 
 
  配置项 | Configuration
-插件会在 data/nonebot_plugin_aichat_simple/ 目录下自动生成以下文件：
+插件会在 data/nonebot_plugin_aichat/ 目录下自动生成以下文件：
 
 config.json: 存储核心配置及 API 信息。
 
