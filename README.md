@@ -7,6 +7,10 @@ nonebot-plugin-aichat-simple
 
 A role-play chat plugin supporting official DeepSeek API, featuring a built-in web management panel.
 
+
+
+
+
  功能特点 | Features
  角色扮演强化：支持自定义 System Prompt，打造专属人格。
 
@@ -22,7 +26,12 @@ A role-play chat plugin supporting official DeepSeek API, featuring a built-in w
 使用 nb-cli 安装（推荐）：
 
 
-### 🛠️ 安装 | Installation
+
+
+
+
+
+安装 | Installation
 
 推荐使用 `nb-cli` 进行安装，它会自动处理依赖项：
 
@@ -32,12 +41,20 @@ nb plugin install nonebot-plugin-aichat
 ```bash
 pip install nonebot-plugin-aichat
 ```
+
+
+
+
  管理面板 | Web Admin Panel
 插件启动后，你可以通过浏览器直接访问管理面板进行全参数调节：
 
 访问地址： http://你的服务器IP:端口/aichat
 
 (注：端口通常为 NoneBot 运行的端口，默认为 8080)
+
+
+
+
 
 面板功能说明：
 交互机制：调节触发前缀（如 #）及随机回复概率。
@@ -47,6 +64,10 @@ API 配置：设置 DeepSeek API Key 及端点。
 模型参数：精细化调节 Temperature、Top_P 等生成参数。
 
 身份映射：将复杂的 QQ 号映射为直观的角色昵称。
+
+
+
+
 
  配置项 | Configuration
 插件会在 data/nonebot_plugin_aichat_simple/ 目录下自动生成以下文件：
@@ -61,6 +82,9 @@ memory.json: 存储长期记忆库。
 
 [!TIP] 默认参数提示：面板中预设的 Prompt 和参数经过多次角色扮演测试，建议初次使用时参考默认值进行微调。
 
+ 
+ 
+ 
  注意事项 | Notice
 隐私安全：请勿将生成的 config.json 文件上传到 GitHub 等公共平台，防止 API Key 泄露。
 
