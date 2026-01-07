@@ -22,13 +22,17 @@ A role-play chat plugin supporting official DeepSeek API, featuring a built-in w
 使用 nb-cli 安装（推荐）：
 
 
+🛠️ 安装 | Installation
+使用 nb-cli 安装（推荐）：
+
 Bash
+
 nb plugin install nonebot-plugin-aichat-simple
 或使用 pip 安装：
 
 Bash
+
 pip install nonebot-plugin-aichat-simple
- 
 
  管理面板 | Web Admin Panel
 插件启动后，你可以通过浏览器直接访问管理面板进行全参数调节：
