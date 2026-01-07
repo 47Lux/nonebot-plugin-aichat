@@ -5,7 +5,7 @@ description = "一个支持 DeepSeek API 的角色扮演插件。"
 authors = ["47Lux <2777433165@qq.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "nonebot_plugin_aichat_simple"}]
+packages = [{include = "nonebot_plugin_aichat"}]
 homepage = "https://github.com/47Lux/nonebot-plugin-aichat"
 repository = "https://github.com/47Lux/nonebot-plugin-aichat"
 
@@ -18,4 +18,5 @@ pydantic = ">=1.10.0,<3.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
+
 build-backend = "poetry.core.masonry.api"
