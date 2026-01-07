@@ -38,8 +38,10 @@ pip install nonebot-plugin-aichat
  管理面板 | Web Admin Panel
 插件启动后，你可以通过浏览器直接访问管理面板进行全参数调节：
 
-访问地址： http://你的服务器IP:端口/aichat
-
+访问地址：
+```bash
+http://你的服务器IP:端口/aichat
+```
 (注：端口通常为 NoneBot 运行的端口，默认为 8080)
 
 
