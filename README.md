@@ -23,12 +23,10 @@ A role-play chat plugin supporting official DeepSeek API, featuring a built-in w
 
 
 Bash
-
 nb plugin install nonebot-plugin-aichat-simple
 或使用 pip 安装：
 
 Bash
-
 pip install nonebot-plugin-aichat-simple
  
 
