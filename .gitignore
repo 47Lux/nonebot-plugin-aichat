@@ -205,3 +205,6 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# AIChat 插件运行时生成的本地数据（包含私密配置）
+nonebot_plugin_aichat_simple/data/
