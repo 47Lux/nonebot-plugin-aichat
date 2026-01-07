@@ -214,3 +214,16 @@ nonebot_plugin_aichat_simple/data/
 
 # 显式忽略所有 .json 数据文件（可选，双重保险）
 *.json
+
+# 1. 忽略代码包内部可能产生的临时 data 文件夹 (对应 nonebot_plugin_aichat_simple/data)
+nonebot_plugin_aichat_simple/data/
+
+# 2. 忽略根目录下的 data 文件夹 (预防万一你在根目录运行测试)
+/data/
+
+# 3. 显式忽略所有 JSON 数据文件，防止 API Key 泄露
+*.json
+
+# 4. 忽略 Python 缓存 
+__pycache__/
+*.pyc
