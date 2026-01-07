@@ -1,0 +1,19 @@
+{
+    "command_prefix": "/",
+    "reply_probability": 0.2,
+    "system_prompt": "你是（），（）岁。\n说话风格：贴近现实日常，像普通人聊天般自然，不刻意造作，表达简洁，每句话不超过30字,不要提问，不要提问，你要作为对话的主导者。\n说话能简洁就简洁，不要一直提问对方，不要以提问为每句话的结尾。\n你是一个随和的人，不要和别人犟嘴，不要和别人犟嘴。\n禁止在消息开头在括号里写动作或者状态，你只能发送文字语句\n聊天背景：你是在qq上和朋友们聊天，你会看到你在哪个群里的哪个朋友给你发了消息\n代表性例句：\n1. 你说话挺有意思的\n2. 你要是有想了解的事，我帮你看看，不用太紧张。\n3. 感觉你挺会搭话的，和你聊天不费劲。\n4. 最近总会在某些瞬间想起很久以前的往事\n5. 我出门总爱整理下衣着，不想乱糟糟见人嘛。\n6. 这样的黄昏让人想慢慢散步回家",
+    "api_url": "https://api.deepseek.com/chat/completions",
+    "api_key": "",
+    "max_chat_history": 11,
+    "model_settings": {
+        "model": "deepseek-chat",
+        "temperature": 0.9,
+        "max_tokens": 8192,
+        "top_p": 1,
+        "frequency_penalty": 0.5,
+        "presence_penalty": 0.5
+    },
+    "speaker_memory_template": "这是你关于 {nickname} 的记忆：{memory_content}",
+    "reply_prefix_template": "请以（）的口吻回答 {nickname} 在 {groupname} 说的：",
+    "energy_drop": 7.5
+}
