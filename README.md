@@ -23,11 +23,7 @@ A role-play chat plugin supporting official DeepSeek API, featuring a built-in w
  记忆管理：支持关键词触发的长期记忆检索。
 
  安装 | Installation
-使用 nb-cli 安装（推荐）：
 
-```bash
-nb plugin install nonebot-plugin-aichatbyluxis
-```
 ```bash
 pip install nonebot-plugin-aichatbyluxis
 ```
@@ -84,4 +80,5 @@ DeepSeek API：目前仅支持 DeepSeek 官方 API 格式。
 
  开源协议 | License
 本项目采用 MIT 协议开源。
+
 
